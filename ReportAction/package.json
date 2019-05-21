@@ -4,8 +4,8 @@
   "displayName": "Sample Report",
   "providerName": "yugdassani",
   "icon": "AppIcon.png",
-  "version": "1",
-  "minorVersion": "19",
+  "version": "2",
+  "minorVersion": "1",
   "appModel": "AppModel.json",
   "description": "Dashboard UI from EazyBI",
   "externalUrls": [
