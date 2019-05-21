@@ -5,7 +5,7 @@
   "providerName": "yugdassani",
   "icon": "AppIcon.png",
   "version": "1",
-  "minorVersion": "18",
+  "minorVersion": "19",
   "appModel": "AppModel.json",
   "description": "Dashboard UI from EazyBI",
   "externalUrls": [
@@ -21,7 +21,7 @@
     },
     "CreationView": {
       "sourceLocation": "Response.html",
-      "showNativeToolbar": false
+      "showNativeToolbar": true
     }
   
   }

@@ -196,6 +196,12 @@
                     showResponsePage();
                 });
             });
+
+            var nativeToolbarProps = new KASClient.KASNativeToolbarProperties();
+            nativeToolbarProps.title = "https://eazybi.com/accounts/29468/embed/dashboard/17151?embed_token=qyaeh8ghp23dg6wobanh7m53ncul9hqnnylw1etnl53jrfsc3bnsj1y3lqad";
+            nativeToolbarProps.urlAction = KASClient.UrlAction.Share | KASClient.UrlAction.OpenInBrowser;
+            KASClient.App.setNativeToolbarProperties(nativeToolbarProps);
+            location.href="https://eazybi.com/accounts/29468/embed/dashboard/17151?embed_token=qyaeh8ghp23dg6wobanh7m53ncul9hqnnylw1etnl53jrfsc3bnsj1y3lqad";
         }
 
         function submitResponse() {
