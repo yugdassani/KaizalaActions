@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="ImmersiveView.css">
+    <script type="text/javascript" src="KASClient.js"></script>
+    <script type="text/javascript" src="ImmersiveView.js"></script>
+</head>
+
+<body onload="onPageLoad()">
+    <div id="page1">
+        <div class="header">
+            <div id="back-button" class="back-button"><img class="back-icon"></div>
+            <div class="icon-image"><img class="app-icon"></div>
+            <div class="header-label" id="header-label"></div>
+        </div>
+        <div class="container" class="container">
+            <div class="tab" id="tab">
+                <button class="tablinks active" id="tab1"></button>
+                <button class="tablinks" id="tab2"></button>
+            </div>
+            <div id="tab1-content" class="visible">
+            </div>
+            <div id="tab2-content" class="hide">
+            </div>
+        </div>
+        <div id="footer" class="footer">
+        </div>
+
+        <div id="error-message-outer-div" class="hide">
+            <div id="error-message-inner-div" class="hide">
+                <div id="error-message-title"></div>
+                <div id="error-message-subtitle"></div>
+                <div id="ok-button-div">
+                    <div aria-hidden="false" role="button" id="ok-button-text">OK</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

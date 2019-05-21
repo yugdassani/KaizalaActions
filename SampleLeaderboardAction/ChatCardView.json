@@ -1,0 +1,240 @@
+{
+    "schemaVersion": 1,
+    "schema": {
+        "type": "container",
+        "layout": "vertical",
+        "children": [{
+                "type": "text",
+                "string": "${Form.properties[LeaderboardCardHeading].value}",
+                "fontSize": 16,
+                "textColor": "#A9A9A9",
+                "marginTop": 3,
+                "marginBottom": 10,
+                "maxNumberOfLines": 9,
+                "marginLeft": 9
+            },
+            {
+                "type": "container",
+                "initialHeight": 10,
+                "layout": "vertical",
+                "children": [{
+                        "type": "container",
+                        "layout": "vertical",
+                        "marginBottom": 2,
+                        "children": [{
+                                "type": "container",
+                                "layout": "horizontal",
+                                "marginBottom": 4,
+                                "children": [{
+                                        "type": "image",
+                                        "height": 45,
+                                        "width": 36,
+                                        "marginLeft": 15,
+                                        "marginRight": 20,
+                                        "marginTop": 5,
+                                        "verticalAlignment": "center",
+                                        "source": "icon-medal-rank1.png",
+                                        "contentMode": "aspectFill"
+                                    },
+                                    {
+                                        "type": "container",
+                                        "layout": "vertical",
+                                        "marginBottom": 4,
+                                        "marginLeft": 2,
+                                        "children": [{
+
+                                                "type": "text",
+                                                "height": 25,
+                                                "string": "${Form.properties[Rank1Name].value}",
+                                                "fontSize": 16,
+                                                "textColor": "#667787",
+                                                "maxNumberOfLines": 1,
+                                                "marginBottom": 0
+
+                                            },
+
+                                            {
+                                                "type": "container",
+                                                "layout": "horizontal",
+                                                "marginBottom": 16,
+                                                "children": [{
+                                                        "type": "text",
+                                                        "textColor": "#98a3a5",
+                                                        "width": 40,
+                                                        "string": "scoreText",
+                                                        "fontSize": 13,
+                                                        "maxNumberOfLines": 1,
+                                                        "marginBottom": 0
+                                                    },
+                                                    {
+                                                        "type": "text",
+                                                        "color": "#32495f",
+                                                        "width": 50,
+                                                        "string": "${Form.properties[Rank1Score].value}",
+                                                        "fontSize": 15,
+                                                        "fontStyle": "bold",
+                                                        "maxNumberOfLines": 1,
+                                                        "marginBottom": 0
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "container",
+                                                "backgroundColor": "#D3D3D3",
+                                                "height": 1,
+                                                "marginLeft": 2
+
+                                            }
+                                        ]
+                                    }
+
+                                ]
+                            }
+
+                        ]
+                    },
+                    {
+                        "type": "container",
+                        "layout": "vertical",
+                        "marginBottom": 8,
+                        "children": [{
+                                "type": "container",
+                                "layout": "horizontal",
+                                "marginBottom": 2,
+                                "children": [{
+                                        "type": "image",
+                                        "height": 45,
+                                        "width": 36,
+                                        "marginLeft": 15,
+                                        "marginRight": 20,
+                                        "marginTop": 5,
+                                        "verticalAlignment": "center",
+                                        "source": "icon-medal-rank2.png",
+                                        "contentMode": "aspectFill"
+                                    },
+                                    {
+                                        "type": "container",
+                                        "layout": "vertical",
+                                        "marginBottom": 4,
+                                        "children": [{
+
+                                                "type": "text",
+                                                "height": 25,
+                                                "string": "${Form.properties[Rank2Name].value}",
+                                                "fontSize": 16,
+                                                "textColor": "#667787",
+                                                "maxNumberOfLines": 1,
+                                                "marginBottom": 0
+
+                                            },
+                                            {
+                                                "type": "container",
+                                                "layout": "horizontal",
+                                                "marginBottom": 16,
+                                                "children": [{
+                                                        "type": "text",
+                                                        "textColor": "#98a3a5",
+                                                        "width": 40,
+                                                        "string": "scoreText",
+                                                        "fontSize": 13,
+                                                        "maxNumberOfLines": 1,
+                                                        "marginBottom": 0
+                                                    },
+                                                    {
+                                                        "type": "text",
+                                                        "color": "#32495f",
+                                                        "width": 50,
+                                                        "string": "${Form.properties[Rank2Score].value}",
+                                                        "fontSize": 15,
+                                                        "fontStyle": "bold",
+                                                        "maxNumberOfLines": 1,
+                                                        "marginBottom": 0
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "container",
+                                                "backgroundColor": "#D3D3D3",
+                                                "height": 1,
+                                                "marginLeft": 2
+                                            }
+                                        ]
+                                    }
+
+                                ]
+                            }
+
+                        ]
+                    },
+                    {
+                        "type": "container",
+                        "layout": "vertical",
+                        "marginBottom": 2,
+                        "children": [{
+                                "type": "container",
+                                "layout": "horizontal",
+                                "children": [{
+                                        "type": "image",
+                                        "height": 45,
+                                        "width": 36,
+                                        "marginLeft": 15,
+                                        "marginRight": 20,
+                                        "marginTop": 5,
+                                        "verticalAlignment": "center",
+                                        "source": "icon-medal-rank3.png",
+                                        "contentMode": "aspectFill"
+                                    },
+                                    {
+                                        "type": "container",
+                                        "layout": "vertical",
+                                        "marginBottom": 6,
+                                        "children": [{
+
+                                                "type": "text",
+                                                "height": 25,
+                                                "string": "${Form.properties[Rank3Name].value}",
+                                                "fontSize": 16,
+                                                "textColor": "#667787",
+                                                "maxNumberOfLines": 1,
+                                                "marginBottom": 0
+
+                                            },
+                                            {
+                                                "type": "container",
+                                                "layout": "horizontal",
+                                                "marginBottom": 2,
+                                                "children": [{
+                                                        "type": "text",
+                                                        "textColor": "#98a3a5",
+                                                        "width": 40,
+                                                        "string": "scoreText",
+                                                        "fontSize": 13,
+                                                        "maxNumberOfLines": 1,
+                                                        "marginBottom": 0
+                                                    },
+                                                    {
+                                                        "type": "text",
+                                                        "color": "#32495f",
+                                                        "width": 50,
+                                                        "string": "${Form.properties[Rank3Score].value}",
+                                                        "fontSize": 15,
+                                                        "fontStyle": "bold",
+                                                        "maxNumberOfLines": 1,
+                                                        "marginBottom": 0
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+
+                                ]
+                            }
+
+                        ]
+                    }
+
+                ]
+            }
+        ]
+    }
+}
