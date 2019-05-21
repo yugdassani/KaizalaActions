@@ -5,7 +5,7 @@
     "providerName": "yugdassani",
     "icon": "AppIcon.png",
     "version": "1",
-    "minorVersion": "12",
+    "minorVersion": "14",
     "appModel": "AppModel.json",
     "description": "Display Leaderboard Scores Template",
     "dials": {
