@@ -1,0 +1,509 @@
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title></title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, sans-serif;
+            display: flex;
+            flex-direction: column;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        textarea:focus,
+        input:focus {
+            outline: none;
+        }
+
+        .section {
+            border-bottom: 1pt solid #d4d8db;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+            margin-bottom: 0;
+            width: 100%;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 40pt;
+            display: inline-box;
+            padding: 0;
+            overflow: hidden;
+            border-bottom: 0.5pt solid #d4d8db;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            box-shadow: 0pt 2pt 4pt 1pt rgba(0, 0, 0, 0.1);
+            z-index: 1;
+        }
+
+        .comment-input {
+            padding-top: 0pt;
+            padding-bottom: 15pt;
+            padding-left: 15pt;
+            padding-right: 15pt;
+            font-size: 12pt;
+            font-weight: normal;
+            color: #32485f;
+            border: 0;
+            outline: 0;
+            background: transparent;
+            width: calc(100%-30pt);
+            font-family: -apple-system, sans-serif;
+        }
+
+        .comment-input::-webkit-input-placeholder {
+            color: #98a3af;
+        }
+
+        input[type=radio] {
+            float: right;
+            width: 15pt;
+            height: 15pt;
+            background-color: white;
+            border: 1px solid transparent;
+            background-size: 100% 100%;
+            -webkit-appearance: none;
+            background-image: url("radio_unchecked.png");
+            background-repeat: no-repeat;
+        }
+
+        input[type=radio]:checked {
+            background-size: 100% 100%;
+            -webkit-appearance: none;
+            background-image: url("radio_checked.png");
+            background-repeat: no-repeat;
+        }
+
+        .checkbox-header {
+            font-size: 13.5pt;
+            padding-bottom: 15pt;
+            font-weight: normal;
+            color: rgb(50, 72, 95);
+        }
+
+        .checkbox {
+            float: right;
+            padding: 9px;
+            background-color: white;
+            border: 0px solid transparent;
+            border-radius: 0px;
+            background-size: 100% 100%;
+            -webkit-appearance: none;
+            background-image: url("checkbox_unchecked.png");
+            background-repeat: no-repeat;
+        }
+
+        .checkbox:checked {
+            background-size: 100% 100%;
+            -webkit-appearance: none;
+            background-image: url("checkbox_checked.png");
+            background-repeat: no-repeat;
+        }
+
+        .question-title {
+            padding: 15pt;
+            font-size: 13.5pt;
+            font-weight: normal;
+            color: rgb(50, 72, 95);
+        }
+
+        .option-div {
+            font-size: 12pt;
+            font-weight: normal;
+            color: rgb(50, 72, 95);
+        }
+
+        .options {
+            height: 24pt;
+            display: flex;
+            align-items: center;
+            padding: 15pt;
+            padding-top: 0pt;
+        }
+
+        .option-title {
+            padding: 15pt;
+            padding-top: 0pt;
+            font-size: 9pt;
+            font-weight: normal;
+            color: #6f7e8f;
+        }
+
+        .bg-view {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2;
+            display: none;
+            touch-action: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+    </style>
+    <script type="text/javascript" src="KASClient.js"></script>
+    <script type="text/javascript">
+        // Type aliases (short names)
+        var KASFormPageNavigator = KASClient.UI.KASFormPageNavigator;
+        var KASFormPage = KASClient.UI.KASFormPage;
+        var KASQuestionType = KASClient.KASQuestionType;
+
+        // Globals
+        var _pageNavigator = null; // type: KASFormPageNavigator
+        var _form; // type: KASForm
+        var _strings = null; // type: Dictionary<StringId: String>
+        var _questionToAnswerMap = {};
+
+        function onPageLoad() {
+            // Remove any existing pages, if any
+            if (_pageNavigator) {
+                _pageNavigator.popAllPages();
+            } else {
+                _pageNavigator = new KASFormPageNavigator();
+                var container = document.getElementById("container");
+                KASClient.UI.addElement(_pageNavigator.getView(), container);
+            }
+
+            KASClient.App.getLocalizedStringsAsync(function (strings, error) {
+                if (error != null) {
+                    showError("Error:getLocalizedStringsAsync:" + error);
+                    return;
+                }
+                _strings = strings;
+
+                KASClient.Form.getFormAsync(function (form, error) {
+                    if (error != null) {
+                        showError("Error:getFormAsync:" + error);
+                        return;
+                    }
+                    _form = form;
+                    showResponsePage();
+                });
+            });
+        }
+
+        function submitResponse() {
+            for (var i = 0; i < _form.questions.length; i++) {
+                if (KASClient.isEmptyString(_questionToAnswerMap[i])) {
+                    showError("Respond to Question-" + (i+1));
+                    return;
+                }
+            }
+
+            // Finally submit the response
+            KASClient.Form.sumbitFormResponse(_questionToAnswerMap);
+        }
+
+        function showResponsePage() {
+            // Main view containing all questions
+            var mainView = KASClient.UI.getElement("div", {
+                "display": "flex",
+                "flex-direction": "column",
+                "background-color": "white",
+                "margin-bottom": "-4pt"
+            });
+
+            for (var i = 0; i < _form.questions.length; i++) {
+                switch (_form.questions[i].type) {
+                    case KASClient.KASQuestionType.Text:
+                        KASClient.UI.addElement(inflateTextQuestionDiv(i), mainView);
+                        break;
+                    case KASClient.KASQuestionType.Numeric:
+                        KASClient.UI.addElement(inflateNumericQuestionDiv(i), mainView);
+                        break;
+                    case KASClient.KASQuestionType.SingleSelect:
+                        KASClient.UI.addElement(inflateSingleSelectQuestionDiv(i), mainView);
+                        break;
+                    case KASClient.KASQuestionType.Image:
+                        KASClient.UI.addElement(inflateImageDiv(i), mainView);
+                        break;
+                    case KASClient.KASQuestionType.MultiSelect:
+                        KASClient.UI.addElement(inflateMultiSelectQuestionDiv(i), mainView);
+                        break;
+                }
+            }
+
+            // Submit button
+            /**var buttonContainer = KASClient.UI.getElement("div", {
+                "position": "fixed",
+                "bottom": "0px",
+                "left": "0px",
+                "width": "100%",
+                "padding": "15px",
+                "z-index": "1",
+                "background-color": "white",
+                "box-shadow": "0px -10px 20px white"
+            });
+
+            var button = KASClient.UI.getButton(_strings["strSendResponseLabel"], submitResponse, {
+                "height": "50px",
+                "width": "calc(100% - 30px)",
+                "line-height": "50px",
+                "text-align": "center",
+                "background-color": "#50d789",
+                "color": "white",
+                "font-size": "16px",
+                "font-weight": "500",
+                "border-radius": "2px",
+            });
+
+            KASClient.UI.addElement(button, buttonContainer);*/
+
+            // Create the page from the containerDiv
+            var page = new KASFormPage();
+            page.navigationBar.title = _strings["strMiniAppTitle"];
+            page.navigationBar.iconPath = "AppIcon.png";
+            //page.bottomBar.elements = [buttonContainer];
+            page.moduleContainer.addViewWithFullWidth(mainView);
+            page.moduleContainer.backgroundColor = "white";
+            page.moduleContainer.getView().style.marginBottom = "100px";
+
+            _pageNavigator.pushPage(page);
+        }
+
+        function inflateTextQuestionDiv(index) {
+            var divAttr = {};
+            if (index == (_form.questions.length - 1)) {
+                divAttr = {
+                    "border-bottom": "none"
+                };
+            }
+
+            var textQuestionDiv = KASClient.UI.getElement("div", divAttr);
+            textQuestionDiv.className = "section";
+
+            var textQuestionTitle = KASClient.UI.getElement("div");
+            textQuestionTitle.className = "question-title";
+            textQuestionTitle.innerText = _form.questions[index].title;
+
+            var textQuestionInput = KASClient.UI.getElement("input");
+            textQuestionInput.type = "text";
+            textQuestionInput.className = "comment-input";
+            textQuestionInput.placeholder = _strings["strTapToEnter"];
+            textQuestionInput.addEventListener("input", function () {
+                _questionToAnswerMap[index] = "" + this.value;
+            });
+
+            KASClient.UI.addElement(textQuestionTitle, textQuestionDiv);
+            KASClient.UI.addElement(textQuestionInput, textQuestionDiv);
+
+            return textQuestionDiv;
+        }
+
+        function inflateNumericQuestionDiv(index) {
+            var divAttr = {};
+            if (index == (_form.questions.length - 1)) {
+                divAttr = {
+                    "border-bottom": "none"
+                };
+            }
+
+            var numericQuestionDiv = KASClient.UI.getElement("div", divAttr);
+            numericQuestionDiv.className = "section";
+
+            var numericQuestionTitle = KASClient.UI.getElement("div");
+            numericQuestionTitle.className = "question-title";
+            numericQuestionTitle.innerText = _form.questions[index].title;
+
+            var numericQuestionInput = KASClient.UI.getElement("input");
+            numericQuestionInput.type = "tel";
+            numericQuestionInput.className = "comment-input";
+            numericQuestionInput.placeholder = _strings["strTapToEnter"];
+            numericQuestionInput.addEventListener("input", function () {
+                _questionToAnswerMap[index] = "" + this.value;
+            });
+
+            KASClient.UI.addElement(numericQuestionTitle, numericQuestionDiv);
+            KASClient.UI.addElement(numericQuestionInput, numericQuestionDiv);
+
+            return numericQuestionDiv;
+        }
+
+        function inflateImageDiv(index) {
+            var divAttr = {};
+            if (index == (_form.questions.length - 1)) {
+                divAttr = {
+                    "border-bottom": "none"
+                };
+            }
+
+            var imageQuestionDiv = KASClient.UI.getElement("div", divAttr);
+            imageQuestionDiv.className = "section";
+
+            var imageQuestionTitle = KASClient.UI.getElement("div");
+            imageQuestionTitle.className = "question-title";
+            imageQuestionTitle.innerText = _form.questions[index].title;
+            KASClient.UI.addElement(imageQuestionTitle, imageQuestionDiv);
+
+            var img = KASClient.UI.getElement("img", {
+                "width": "40",
+                "height": "40",
+                "padding-left": "15pt",
+                "padding-top": "0px"
+            });
+            img.setAttribute("src", "AttachmentIcon.png");
+
+            img.onclick = function () {
+                KASClient.App.showImagePickerAsync(function (selectedImagePath, error) {
+                    if (error != null) {
+                        showError("Error:showImagePickerAsync:" + error);
+                        return;
+                    }
+                    _questionToAnswerMap[index] = selectedImagePath;
+                    img.setAttribute("src", selectedImagePath);
+                });
+            };
+
+            KASClient.UI.addElement(img, imageQuestionDiv);
+
+            return imageQuestionDiv;
+        }
+
+        function inflateSingleSelectQuestionDiv(index) {
+            var question = _form.questions[index];
+
+            var divAttr = {};
+            if (index == (_form.questions.length - 1)) {
+                divAttr = {
+                    "border-bottom": "none"
+                };
+            }
+
+            var questionDiv = KASClient.UI.getElement("div", divAttr);
+            questionDiv.className = "section";
+
+            var questionTitle = KASClient.UI.getElement("div");
+            questionTitle.className = "question-title";
+            questionTitle.innerText = question.title;
+            KASClient.UI.addElement(questionTitle, questionDiv);
+
+            var optionDiv = KASClient.UI.getElement("div");
+            optionDiv.className = "option-div";
+            optionDiv.id = "optionDiv"
+
+            for (i = 0; i < question.options.length; i++) {
+                var option = question.options[i];
+
+                var options = KASClient.UI.getElement("div");
+                options.className = "options";
+                options.value = option.id;
+                options.onclick = function () {
+                    _questionToAnswerMap[index] = "" + this.value;
+                    document.getElementById("SingleSelectOption" + this.value).checked = true;
+                };
+
+                var title = KASClient.UI.getElement("label", {
+                    "width": "85%",
+                    "padding-left": "6pt"
+                });
+                title.innerText = option.text;
+
+                var radio = KASClient.UI.getElement("input");
+                radio.type = "radio";
+                radio.name = "question" + question.id;
+                radio.id = "SingleSelectOption" + option.id;
+
+                KASClient.UI.addElement(title, options);
+                KASClient.UI.addElement(radio, options);
+                KASClient.UI.addElement(options, optionDiv);
+            }
+
+            KASClient.UI.addElement(optionDiv, questionDiv);
+
+            return questionDiv;
+        }
+
+        function inflateMultiSelectQuestionDiv(index) {
+            var divAttr = {};
+            if (index == (_form.questions.length - 1)) {
+                divAttr = {
+                    "border-bottom": "none"
+                };
+            }
+
+            var multiSelectQuestionDiv = KASClient.UI.getElement("div", divAttr);
+            multiSelectQuestionDiv.className = "section";
+
+            var questionTitle = KASClient.UI.getElement("div");
+            questionTitle.className = "question-title";
+            questionTitle.innerText = _form.questions[index].title;
+            KASClient.UI.addElement(questionTitle, multiSelectQuestionDiv);
+
+            var optionDiv = KASClient.UI.getElement("div");
+            optionDiv.className = "option-div";
+            optionDiv.id = "optionDiv"
+
+            for (i = 0; i < _form.questions[index].options.length; i++) {
+                var option = _form.questions[index].options[i];
+
+                var options = KASClient.UI.getElement("div");
+                options.className = "options";
+                options.value = option.id;
+                options.onclick = function () {
+                    var selectedOptions = [];
+                    for (var j = 0; j < _form.questions[index].options.length; j++) {
+                        if (document.getElementById("multiSelectOption" + j).checked)
+                        selectedOptions.push(j);
+                    }
+                    _questionToAnswerMap[index] = JSON.stringify(selectedOptions);
+                };
+
+                var title = KASClient.UI.getElement("label", {
+                    "width": "85%",
+                    "padding-left": "6pt"
+                });
+                title.innerText = option.text;
+
+                var checkbox = KASClient.UI.getElement("input");
+                checkbox.type = "checkbox";
+                checkbox.className = "checkbox";
+                checkbox.name = "question" + _form.questions[index].id;
+                checkbox.id = "multiSelectOption" + option.id;
+
+                KASClient.UI.addElement(title, options);
+                KASClient.UI.addElement(checkbox, options);
+                KASClient.UI.addElement(options, optionDiv);
+            }
+
+            KASClient.UI.addElement(optionDiv, multiSelectQuestionDiv);
+
+            return multiSelectQuestionDiv;
+        }
+
+        function showError(errorMsg) {
+            KASClient.App.showNativeErrorMessage(errorMsg);
+        }
+    </script>
+</head>
+
+<body onload="onPageLoad()">
+    <div id="container">
+    </div>
+   <br><br><br>
+    <div>
+        <iframe style="position:fixed; top:65; left:0; bottom:0; right:0; width:100%; height:100%; 
+                        border:none; margin:0; padding:0; overflow:hidden; z-index:999999;" 
+                        src="https://eazybi.com/accounts/29468/embed/dashboard/17151?embed_token=qyaeh8ghp23dg6wobanh7m53ncul9hqnnylw1etnl53jrfsc3bnsj1y3lqad" 
+                        frameborder="1" scrolling="false">
+                            
+        </iframe>
+    </div>
+</body>
+
+</html>
