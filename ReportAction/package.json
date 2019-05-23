@@ -1,11 +1,11 @@
 {
   "id": "com.yd.testact",
   "schemaVersion": 1,
-  "displayName": "Sample Report",
+  "displayName": "Dashboard",
   "providerName": "yugdassani",
   "icon": "AppIcon.png",
   "version": "2",
-  "minorVersion": "3",
+  "minorVersion": "4",
   "appModel": "AppModel.json",
   "description": "Dashboard UI from EazyBI",
   "externalUrls": [
@@ -13,7 +13,15 @@
   ],
 
   "views": {
-
+    "ChatCanvasCardView": {
+      "showLikes": false,
+      "showComments": false,
+      "showExpiry": false,
+      "showHeader": true,
+      "showFooter": true,
+      "showResponseCount": false,
+      "labelRespondToForm": "Open Dashboard"
+    },
     "CreationView": {
       "sourceLocation": "Response.html",
       "showNativeToolbar": true
