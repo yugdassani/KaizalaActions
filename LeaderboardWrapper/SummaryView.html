@@ -1,0 +1,67 @@
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <style>
+        body {
+            margin: 0;
+        }
+        h1 {
+            color: #fff;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 16pt;
+        }
+        .header {
+            display: flex;
+            background-color: rgba(0, 120, 212, 1);;
+            align-items: center;
+        }
+        .header-icon {
+            height: 50px;
+            object-fit: scale-down;
+        }
+        .body-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+        }
+        .label {
+            color: #445463;
+            font-size: 14pt;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            padding-bottom: 10px;
+        }
+        .error {
+            color: #EC2127;
+        }
+        .button-style {
+          height: 50px;
+          width: 96%;
+          margin: 2%;
+          line-height: 50px;
+          text-align: center;
+          background-color: rgba(0, 120, 212, 1);
+          color: white;
+          font-size: 15px;
+          font-weight: 500;
+          border-radius: 25px;
+          pointer-events: none;
+        }
+    </style>
+    <script type="text/javascript" src="KASClient.js"></script>
+    <script type="text/javascript" src="Summary.js"></script>
+</head>
+
+<body onLoad="onPageLoad()">
+    <div id="header" class="header" onclick="backclicked()">
+        <img src="back-arrow.png" class="header-icon"/>
+        <h1>Authenticated message</h1>
+    </div>
+    <div id="container" class="body-container">
+        <div class="label error" id="error-field"></div>
+        <div class="label" id="message-field"></div>
+    </div>
+</body>
+
+</html>
