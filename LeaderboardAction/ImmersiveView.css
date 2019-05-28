@@ -1,0 +1,400 @@
+:root {
+    --main-text-color: #32495f;
+}
+
+body {
+    margin: 0px;
+    font-family: sans-serif;
+    user-select: none;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin-top: 16px;
+    margin-left: 29px;
+}
+
+p {
+    white-space: nowrap;
+    width: calc(100%-4px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0;
+    font-size: 17px;
+}
+
+.header-back {
+    color: #05A0E9;
+    float: left
+}
+
+.tab {
+    overflow: hidden;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+    width: 100%;
+}
+
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    padding: 16px 15px;
+    font-size: 14px;
+    font-weight: bold;
+    color: grey;
+}
+
+.tab button.active {
+    border-bottom: 2px solid #0078d4;
+    color: #0078d4;
+}
+
+.header {
+    background: #fff;
+    min-height: 50px;
+    box-shadow: 0px 1px 2px #ccc;
+    position: fixed;
+    display: block;
+    width: 100%;
+    top: 0px;
+    z-index: 99999;
+}
+
+.back-button {
+    width: 30px;
+    height: 30px;
+    float: left;
+    margin-top: 17px;
+    margin-left: 10px;
+}
+
+.back-icon {
+    width: 50%;
+    margin-left: 5px;
+    content: url(back.png);
+}
+
+.icon-image {
+    width: 35px;
+    height: 35px;
+    float: left;
+    margin-top: 8px;
+    margin-left: 2px;
+}
+
+.header-label {
+    float: left;
+    width: 60%;
+    color: #333;
+    font-size: 18px;
+    font-weight: 500;
+    margin-left: 9px;
+    margin-top: 15px;
+    font-family: sans-serif;
+}
+
+.app-icon {
+    content: url(AppIcon.png);
+    width: 100%;
+    height: 100%;
+
+}
+
+.participant-div {
+    padding-top: 8px;
+    margin-left: 20px;
+    height: 69px;
+}
+
+.img-div {
+    float: left;
+    margin-right: 20px;
+}
+
+.user-stats-div {
+    padding-left: 24px;
+}
+
+.rank-circle {
+    height: 30px;
+    width: 30px;
+    background-color: #ecf2f6;
+    border-radius: 50%;
+    display: inline-block;
+    text-align: center;
+    vertical-align: center;
+    line-height: 30px;
+    font-weight: bold;
+}
+
+.current-rank-circle {
+    height: 30px;
+    width: 30px;
+    background-color: white;
+    border-radius: 50%;
+    display: inline-block;
+    text-align: center;
+    vertical-align: center;
+    line-height: 30px;
+    font-weight: bold;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    margin-bottom: 0;
+    width: 100%;
+    display: inline-box;
+    padding-right: 5%;
+    overflow: hidden;
+    background-size: contain;
+    background: #bfe8ff;
+    z-index: 9999;
+    box-shadow: 0px 1px 10px 4px #d0d0d0;
+}
+
+.user-score-text {
+    color: #98a3a5;
+    font-size: 14px;
+}
+
+.user-score-text-footer {
+    color: var(--main-text-color);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.user-score {
+    font-weight: bold;
+    font-size: 17px;
+    padding-left: 5px;
+    color: var(--main-text-color);
+}
+
+.param-bar {
+    height: 60px;
+    width: 33%;
+    float: left;
+    margin-bottom: 24px;
+    text-align: center;
+    font-size: 30px;
+}
+
+.tablinks {
+    text-align: center;
+    width: 50%;
+}
+
+.container {
+    margin-top: 50px;
+}
+
+.current-user-img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+}
+
+.inner-participant-div {
+    display: flex;
+    width: 100%;
+}
+
+.param-subtitle {
+    font-size: 10px;
+    color: #667787;
+    padding-bottom: 12px;
+    text-overflow: ellipsis;
+    padding-top: 8px;
+}
+
+.tab2-img-div {
+    width: 5%;
+    display: block;
+}
+
+.tab2-user-stats-div {
+    width: 70%;
+}
+
+.tab2-current-user-img-div {
+    width: 20%;
+}
+
+.img-div-footer {
+    margin-top: 5px;
+}
+
+.parameters-div {
+    width: 100%;
+    display: inline-block;
+    margin-left: 4px;
+}
+
+.inner-param-bar {
+    margin-right: 5px;
+    background-color: white;
+    border-radius: 5px;
+    padding-top: 12px;
+    padding-left: 12px;
+    padding-right: 12px;
+    color: var(--main-text-color);
+}
+
+.hide {
+    display: none;
+}
+
+.visible {
+    display: block;
+}
+
+.rank-circle-position1 {
+    background-image: url("icon-medal-rank1.png");
+    width: 34px;
+    height: 50px;
+    background-repeat: no-repeat;
+    background-size: 36px;
+}
+
+.rank-circle-position2 {
+    background-image: url("icon-medal-rank2.png");
+    width: 34px;
+    height: 50px;
+    background-repeat: no-repeat;
+    background-size: 36px;
+}
+
+.rank-circle-position3 {
+    background-image: url("icon-medal-rank3.png");
+    width: 34px;
+    height: 50px;
+    background-repeat: no-repeat;
+    background-size: 36px;
+}
+
+.user-score-footer {
+    font-weight: 500;
+    font-size: 17px;
+    padding-left: 5px;
+    color: var(--main-text-color);
+}
+
+.statistics {
+    padding: 15px;
+    background: linear-gradient(to bottom, rgba(182, 221, 237, 1) 0%, rgba(189, 231, 255, 1) 5%, rgba(189, 231, 255, 1) 100%);
+}
+
+.current-participant-div {
+    background: #bfe8ff;
+    padding: 16px;
+    padding-left: 20px;
+    margin-bottom: 9px;
+}
+
+.user-name {
+    color: #667787;
+    font-size: 15px;
+    margin-bottom: 2px;
+}
+
+.current-user-name {
+    color: var(--main-text-color);
+    margin-bottom: 2px;
+    font-weight: 500;
+}
+
+.near-by-ranks-heading-band {
+    height: 20px;
+    font-size: 14px;
+    margin-top: 16px;
+    font-weight: 500;
+    margin-left: 20px;
+    padding: 5px;
+}
+
+.my-statistics-heading-band {
+    height: 20px;
+    width: 95%;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 5px;
+}
+
+.current-user-footer {
+    margin-bottom: 0px;
+}
+
+.before-current-participant-div {
+    height: 54px;
+}
+
+.flex {
+    display: flex;
+}
+
+#error-message-outer-div {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background-color: rgba(50, 72, 95, 0.5);
+    z-index: 2;
+    flex: 1 1 0%;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+#error-message-inner-div {
+    margin: 20px;
+    padding: 20px;
+    background-color: white;
+    flex-direction: column;
+}
+
+#error-message-title {
+    overflow-wrap: break-word;
+    word-break: break-word;
+    color: rgb(50, 72, 95);
+    font-size: 20px;
+    font-weight: 600;
+}
+
+#error-message-subtitle {
+    overflow-wrap: break-word;
+    word-break: break-word;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: rgb(111, 126, 143);
+    font-size: 16px;
+}
+
+#ok-button-text {
+    overflow-wrap: break-word;
+    word-break: break-word;
+    font-size: 14px;
+    font-weight: 600;
+    margin-left: 20px;
+    color: rgb(0, 111, 241);
+    -webkit-appearance: none;
+    border: none;
+}
+
+#ok-button-div {
+    display: flex;
+    justify-content: flex-end
+}
+
+#tab1-content {
+    padding-bottom: 80px;
+    padding-top: 16px;
+}
+
+#tab2-content {
+    padding-bottom: 10px;
+}
