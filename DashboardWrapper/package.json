@@ -1,0 +1,32 @@
+{
+  "id": "com.yugdassani.authAction",
+  "schemaVersion": 1,
+  "displayName": "Team Dashboard",
+  "providerName": "yugdassani",
+  "icon": "AppIcon.png",
+  "version": "1",
+  "minorVersion": "7",
+  "appModel": "AppModel.json",
+  "description": "Get team reports and Dashboards",
+  "actionScope": "Single",
+  "views": {
+    "ChatCanvasCardView": {
+      "showReceipts": true,
+      "showLikes": false,
+      "showComments": false,
+      "showExpiry": false,
+      "isResponseEditable": false,
+      "showFooter": false,
+	    "sourceLocation":"ChatCardView.json"
+    },
+    "CreationView": {
+      "sourceLocation": "SummaryView.html",
+      "labelHeader": "Verify to Proceed",
+      "showNativeToolbar": false,
+      "backDialogVisibility": false
+    },
+    "DiscoverView": {
+      "icon": "AppIcon.png"
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+    "schemaVersion": 1,
+    "schema": {
+        "type": "container",
+        "initialHeight": 600,
+        "layout": "horizontal",
+        "children": [
+            {
+                "type": "text",
+                "marginLeft": 10,
+                "paddingRight": 10,
+                "string": "Fetching your report. Please wait..",
+                "fontSize": 14,
+                "fontStyle": "Roboto-Medium",
+                "textColor": "#6e6e6e",
+                "textAlignment": "left",
+                "maxNumberOfLines": 3,
+                "marginBottom": 10
+            }
+        ]
+    }
+}
