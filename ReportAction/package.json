@@ -1,11 +1,11 @@
 {
-  "id": "com.yd.testact",
+  "id": "com.yd.dashboardAction",
   "schemaVersion": 1,
   "displayName": "Dashboard",
   "providerName": "yugdassani",
   "icon": "AppIcon.png",
-  "version": "2",
-  "minorVersion": "5",
+  "version": "1",
+  "minorVersion": "1",
   "appModel": "AppModel.json",
   "description": "Dashboard UI from EazyBI",
   "externalUrls": [
