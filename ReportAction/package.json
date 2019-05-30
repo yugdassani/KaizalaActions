@@ -1,16 +1,13 @@
 {
-  "id": "com.yd.dashboardAction",
+  "id": "com.yd.hope",
   "schemaVersion": 1,
   "displayName": "Dashboard",
   "providerName": "yugdassani",
   "icon": "AppIcon.png",
   "version": "1",
-  "minorVersion": "1",
+  "minorVersion": "2",
   "appModel": "AppModel.json",
   "description": "Dashboard UI from EazyBI",
-  "externalUrls": [
-    { "url" : "https://eazybi.com/accounts/29468/embed/dashboard/17151?embed_token=qyaeh8ghp23dg6wobanh7m53ncul9hqnnylw1etnl53jrfsc3bnsj1y3lqad" }
-  ],
 
   "views": {
     "ChatCanvasCardView": {
