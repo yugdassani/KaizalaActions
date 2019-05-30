@@ -173,6 +173,10 @@
         var properties=[];
 
         function onPageLoad() {
+
+            KASClient.App.registerHardwareBackPressCallback(function () {
+                KASClient.App.dismissCurrentScreen();
+            });
             // Remove any existing pages, if any
             if (_pageNavigator) {
                 _pageNavigator.popAllPages();
@@ -196,16 +200,21 @@
                     }
                     _form = form;
                     readProperties();
+                    init();
                     var nativeToolbarProps = new KASClient.KASNativeToolbarProperties();
                     nativeToolbarProps.title = url
                     nativeToolbarProps.urlAction = KASClient.UrlAction.Share | KASClient.UrlAction.OpenInBrowser;
                     KASClient.App.setNativeToolbarProperties(nativeToolbarProps);
                     location.href=url;
-
                     //showResponsePage();
                 });
             });
 
+        }
+
+        function init(){
+            document.getElementById("back-button").addEventListener('click', KASClient.App.dismissCurrentScreen);
+            document.getElementById('header-label').textContent = _strings['strMiniAppTitle'];
         }
 
         function readProperties() {
@@ -226,17 +235,12 @@
 </head>
 
 <body onload="onPageLoad()">
+    <div class="header">
+            <div id="back-button" class="back-button"><img class="back-icon"></div>
+            <div class="header-label" id="header-label"></div>
+        </div>
     <div id="container">
-    </div>
-   <br><br><br>
-    <div>
-        <iframe style="position:fixed; top:65; left:0; bottom:0; right:0; width:100%; height:100%; 
-                        border:none; margin:0; padding:0; overflow:hidden; z-index:999999;" 
-                        src="https://eazybi.com/accounts/29468/embed/dashboard/17151?embed_token=qyaeh8ghp23dg6wobanh7m53ncul9hqnnylw1etnl53jrfsc3bnsj1y3lqad" 
-                        frameborder="1" scrolling="false">
-                            
-        </iframe>
-    </div>
+    </div>    
 </body>
 
 </html>
