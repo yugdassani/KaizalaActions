@@ -5,7 +5,7 @@
   "providerName": "yugdassani",
   "icon": "AppIcon.png",
   "version": "1",
-  "minorVersion": "3",
+  "minorVersion": "6",
   "appModel": "AppModel.json",
   "description": "Dashboard UI from EazyBI",
 
