@@ -1,13 +1,13 @@
 {
   "id": "com.yugdassani.authAction",
   "schemaVersion": 1,
-  "displayName": "Team Dashboard",
+  "displayName": "Variance Dashboard",
   "providerName": "yugdassani",
   "icon": "AppIcon.png",
   "version": "1",
-  "minorVersion": "7",
+  "minorVersion": "8",
   "appModel": "AppModel.json",
-  "description": "Get team reports and Dashboards",
+  "description": "Variance and Invoicing Dashboards",
   "actionScope": "Single",
   "views": {
     "ChatCanvasCardView": {

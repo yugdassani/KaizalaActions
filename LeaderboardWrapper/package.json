@@ -1,13 +1,13 @@
 {
   "id": "com.yugdassani.leaderboardWrapper",
   "schemaVersion": 1,
-  "displayName": "Sales Leaderboard",
+  "displayName": "Statistics and Leaderboard",
   "providerName": "yugdassani",
   "icon": "AppIcon.png",
   "version": "1",
-  "minorVersion": "1",
+  "minorVersion": "2",
   "appModel": "AppModel.json",
-  "description": "Get personal statistics and Sales Leaderboard",
+  "description": "Statistics and Leaderboard",
   "actionScope": "Single",
   "views": {
     "ChatCanvasCardView": {
