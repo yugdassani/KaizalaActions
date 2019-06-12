@@ -5,11 +5,12 @@ var currentUserRank; // rank of user opening the card
 var allUsersData; // all users data we get from properties
 var currentUserStats; // json for current user details like name, score, phoneNo etc.
 var strings; //strings from strings.json
+var currentRegionStats = [];
 
 /*Fields from excel */
-const NAME = "Name";
+const NAME = "Department";
 const PHONENO = "PhoneNo";
-const SCORE = "Score";
+const SCORE = "Variance";
 
 const NO_OF_USERS_TO_DISPLAY = 10; //no. of users to display in tab 1
 
@@ -77,7 +78,7 @@ function onPageLoad() {
                     showErrorDialogBox();
                 }
                 currentUserInfo = users[conversationDetails.currentUserId];
-                showImmersivePage(isCurrentUserInLeaderboard());
+                showImmersivePage(updateCurrentRegion("United States"));
             });
         });
     });
@@ -100,6 +101,7 @@ populateTab1Data(): Top 10 tab displays 10 users at the moment, each box(contain
 */
 function populateTab1Data() {
     var tab1 = document.getElementById("tab1-content");
+    tab1.innerHTML = '';
     var endRank = allUsersData.length < NO_OF_USERS_TO_DISPLAY ? allUsersData.length : NO_OF_USERS_TO_DISPLAY;
     for (var i = 1; i <= endRank; i++) {
         tab1.appendChild(createParticipantDiv(i, allUsersData[i - 1][NAME], allUsersData[i - 1][SCORE]));
@@ -127,7 +129,20 @@ createStatisticsDiv(): box containing all statistics of user
 **/
 function createStatisticsDiv() {
     var statisticsDiv = createDivGivenClassName("statistics");
-    statisticsDiv.appendChild(createMyStatisticsHeadingBand(strings["myStatisticsText"]));
+    var dept = currentUserStats[NAME];
+    if(dept.includes("Wealth"))
+        statisticsDiv.appendChild(createMyStatisticsHeadingBand("Wealth Processing"));
+    else if(dept.includes("Legal"))
+        statisticsDiv.appendChild(createMyStatisticsHeadingBand("Legal"));
+    else if(dept.includes("HR"))
+        statisticsDiv.appendChild(createMyStatisticsHeadingBand("HR"));
+    else if(dept.includes("Finance"))
+        statisticsDiv.appendChild(createMyStatisticsHeadingBand("Finance"));
+    else if(dept.includes("Compliance"))
+        statisticsDiv.appendChild(createMyStatisticsHeadingBand("Compliance"));
+    else if(dept.includes("Treasury"))
+        statisticsDiv.appendChild(createMyStatisticsHeadingBand("Treasury"));
+
     statisticsDiv.appendChild(createParametersDiv());
     return statisticsDiv;
 }
@@ -139,12 +154,67 @@ function getNoOfParameters() {
 
 function populateTab2Data() {
     var tab2 = document.getElementById("tab2-content");
+    tab2.innerHTML = '';
+    var i=0,j=0;
+    var dept = ["Legal","Finance","HR","Wealth Processing","Treasury","Compliance"];
 
-    if (getNoOfParameters() != 0) {
+    tab2.appendChild(addButtonsDiv());
+    for (i = 0; i < currentRegionStats.length ; i++) {
+        for (j = 0; j < currentRegionStats.length ; j++) {
+            currentUserStats = currentRegionStats[j];
+            if(currentUserStats[NAME].includes(dept[i])){
+                //console.log(dept[i]);
+                break;
+            }
+        }
+        console.log("Stats-"+currentUserStats[NAME]);
         tab2.appendChild(createStatisticsDiv());
     }
 
-    tab2.appendChild(createNearByScorersDiv());
+    //tab2.appendChild(createNearByScorersDiv());
+    
+
+}
+
+/**
+addButtonsDiv() : Adds buttons to view further personal details such as Bonus and Target components
+*/
+function addButtonsDiv() {
+
+    var buttonsDiv = createDivGivenClassName("search_categories");
+    var frag = document.createDocumentFragment();
+    var select = document.createElement("select");
+    select.options.add(new Option("United States"));
+    select.options.add(new Option("Japan"));
+    select.options.add(new Option("Italy"));
+    select.options.add(new Option("Singapore"));
+    select.options.add(new Option("United Kingdom"));
+    var id = document.createAttribute("id");
+    id.value = "search_categories";
+    select.setAttributeNode(id);
+    select.addEventListener('change', changeRegion);
+    frag.appendChild(select);
+    buttonsDiv.appendChild(frag);
+
+    /**var bonusButton = document.createElement("button");
+    var idAttr = document.createAttribute("id");
+    idAttr.value = "bonus-button";
+    bonusButton.setAttributeNode(idAttr);
+    var bonusButtonText = document.createTextNode("My Bonus");
+    bonusButton.appendChild(bonusButtonText);
+    bonusButton.addEventListener('click', openTab)
+    buttonsDiv.appendChild(bonusButton);*/
+
+    return buttonsDiv;
+
+}
+
+function changeRegion(event){
+    var index = document.getElementById("search_categories").selectedIndex;
+    showImmersivePage(updateCurrentRegion(event.target.value));
+    displayTab2();
+    console.log(index);
+    document.getElementById("search_categories").selectedIndex = index;
 }
 
 /**
@@ -228,13 +298,13 @@ function createParametersDiv() {
     var i;
 
     for (i = 0; i < Object.keys(currentUserStats).length; i++) {
-        if (Object.keys(currentUserStats)[i] != NAME && Object.keys(currentUserStats)[i] != PHONENO && Object.keys(currentUserStats)[i] != SCORE)
+        if (Object.keys(currentUserStats)[i] != NAME)
             allParametersKeys.push(Object.keys(currentUserStats)[i]);
     }
     var noOfParams = allParametersKeys.length;
 
     noOfParams = noOfParams > MAX_NO_OF_PARAMETERS_TO_DISPLAY ? MAX_NO_OF_PARAMETERS_TO_DISPLAY : noOfParams;
-
+    console.log(currentUserStats[NAME]);
     for (i = 0; i < noOfParams; i++) {
         parametersDiv.appendChild(createParamBar(currentUserStats[allParametersKeys[i]], allParametersKeys[i]));
     }
@@ -282,15 +352,15 @@ function createNearByScorersDiv() {
 /**
  * isCurrentUserInLeaderboard(): checks if person opening the card is present in leaderboard
  */
-function isCurrentUserInLeaderboard() {
+function updateCurrentRegion(region) {
+    currentRegionStats.splice(0,currentRegionStats.length)
     for (var i = 0; i < allUsersData.length; i++) {
-        if (allUsersData[i][PHONENO] == currentUserInfo.phoneNumber) {
-            currentUserRank = i + 1;
-            currentUserStats = allUsersData[i];
-            return true;
+        var dept = allUsersData[i][NAME];
+        if (dept.includes(region)) {
+            currentRegionStats.push(allUsersData[i]);
         }
     }
-    return false;
+    return true;
 }
 
 /**
@@ -358,17 +428,11 @@ function createCurrentUserDiv() {
     return currentUserDiv;
 }
 
-function showImmersivePage(isCurrentUserInLeaderboard) {
-    if (isCurrentUserInLeaderboard) //show normal view for current user present in leaderboard
-    {
-        inflateFooter();
+function showImmersivePage(updateCurrentRegion) {
+
+        //inflateFooter();
         populateTab1Data();
         populateTab2Data();
-    } else //show only tab 1 data for user not present in leaderboard
-    {
-        document.getElementById("tab").classList.add("hide");
-        populateTab1Data();
-    }
 }
 
 function displayTab1() {
@@ -394,6 +458,6 @@ function displayTab2() {
 function openTab(event) {
     if (event.target.id == 'tab1')
         displayTab1();
-    else
+    else if(event.target.id == 'tab2')
         displayTab2();
 }

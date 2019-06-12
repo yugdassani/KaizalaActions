@@ -1,11 +1,11 @@
 {
     "displayName": "Leaderboard",
     "tab1Text": "Top 10",
-    "tab2Text": "My Performance",
+    "tab2Text": "Statistics",
     "nearByScorersText": "Near by Ranks",
-    "myStatisticsText": "My Statistics",
+    "myStatisticsText": "My Stats",
     "cardFooterText": "Tap to view details",
-    "scoreText": "Progress to Target",
+    "scoreText": "Variance",
     "errorMessageTitle": "Quiz Leaderboard",
     "errorMessageSubtitle": "Some error occured"
 }

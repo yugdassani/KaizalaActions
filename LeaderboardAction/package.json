@@ -1,11 +1,11 @@
 {
-    "id": "com.yugdassani.anotherone",
+    "id": "com.yugdassani.customBarclays",
     "schemaVersion": 1,
-    "displayName": "Testing Report",
+    "displayName": "Barclays dashboard",
     "providerName": "yugdassani",
     "icon": "AppIcon.png",
     "version": "1",
-    "minorVersion": "15",
+    "minorVersion": "1",
     "appModel": "AppModel.json",
     "description": "Display Leaderboard Scores Template",
     "dials": {
