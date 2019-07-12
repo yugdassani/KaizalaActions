@@ -1,0 +1,89 @@
+{
+    "schemaVersion": 1,
+    "schema": {
+        "type": "container",
+        "layout": "vertical",
+        "children": [{
+               "type": "text",
+               "textAlignment": "center",
+               "string": "${Form.properties[ticketnumber].value}",
+               "fontSize": 18,
+               "backgroundColor":"#FFDB00",
+               "fontStyle": "bold",
+               "textColor": "#000000",
+               "paddingLeft":10,
+               "paddingRight":10,
+               "paddingTop":10,
+               "paddingBottom":10,
+               "marginBottom": 10
+            },
+            {
+               "type":"text",
+                "paddingLeft":10,
+                "paddingRight":10,
+                "string":"${Form.properties[category].value}",
+                "fontSize":16,
+                "fontStyle":"regular",
+                "textColor":"#000000",
+                "backgroundColor":"#ffffff",
+                "textAlignment":"left",
+                "maxNumberOfLines":5,
+                "marginBottom":10
+            },
+            {
+               "type":"text",
+                "paddingLeft":10,
+                "paddingRight":10,
+                "string":"${Form.properties[vendorname].value}",
+                "fontSize":16,
+                "fontStyle":"regular",
+                "textColor":"#000000",
+                "backgroundColor":"#ffffff",
+                "textAlignment":"left",
+                "maxNumberOfLines":5,
+                "marginBottom":10
+            },
+            {
+                "type":"text",
+                "paddingLeft":10,
+                "paddingRight":10,
+                "string":"${Form.properties[transaction].value}",
+                "fontSize":16,
+                "fontStyle":"regular",
+                "textColor":"#000000",
+                "backgroundColor":"#ffffff",
+                "textAlignment":"left",
+                "maxNumberOfLines":2,
+                "marginBottom":10
+            },
+            {
+                "type":"text",
+                "paddingLeft":10,
+                "paddingRight":10,
+                "string":"${Form.properties[comments].value}",
+                "fontSize":16,
+                "fontStyle":"regular",
+                "textColor":"#000000",
+                "backgroundColor":"#ffffff",
+                "textAlignment":"left",
+                "maxNumberOfLines":2,
+                "marginBottom":10
+            },
+            {
+                "type":"text",
+                "paddingLeft":10,
+                "paddingRight":10,
+                "string":"${Form.properties[ticketstatus].value}",
+                "fontSize":16,
+                "fontStyle":"regular",
+                "textColor":"#000000",
+                "backgroundColor":"#ffffff",
+                "textAlignment":"left",
+                "maxNumberOfLines":2,
+                "marginBottom":10
+            }
+        ]
+    }
+}        
+            
+

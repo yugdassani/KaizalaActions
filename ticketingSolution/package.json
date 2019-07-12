@@ -1,0 +1,28 @@
+{
+     "id": "com.yugdassani.onboardTicket1",
+     "schemaVersion": 1,
+     "displayName": "Service Ticket",
+     "providerName": "yugdassani",
+     "icon": "AppIcon.png",
+     "version": "1",
+     "minorVersion": "4",
+     "appModel": "AppModel.json",
+     "description": "Onboarding Status",
+     "dials": {
+         "isLocalised": false,
+         "isPinned": false
+     },
+     "views": {
+         "ChatCanvasCardView": {
+             "sourceLocation": "ChatCardView.json",
+             "showReceipts": true,
+             "showLikes": false,
+             "showComments": false,
+             "showExpiry": false,
+             "showFooter": true,
+             "showHeader": false,
+             "showFooter": false,
+             "isResponseEditable": false
+         }
+     }
+}
